@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://s1i32u2gpmpl"]
 
 [ext_resource type="Script" uid="uid://bfjj4on1gptcm" path="res://scenes/upgrade_tree.gd" id="1_rgrb3"]
-[ext_resource type="Texture2D" uid="uid://dd0t78d02kw1h" path="res://assets/icons/Pixel Art Icon Pack - RPG/Equipment/Bag.png" id="2_x6bdh"]
+[ext_resource type="PackedScene" uid="uid://c3on47dufxq66" path="res://scenes/upgrade_node.tscn" id="2_x6bdh"]
 
 [sub_resource type="Gradient" id="Gradient_rgrb3"]
 offsets = PackedFloat32Array(1)
@@ -26,6 +26,14 @@ centered = false
 unique_name_in_owner = true
 anchor_mode = 0
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1070863043]
-position = Vector2(227, 127)
-texture = ExtResource("2_x6bdh")
+[node name="Upgrade" parent="." unique_id=1765005584 instance=ExtResource("2_x6bdh")]
+offset_left = 288.0
+offset_top = 160.0
+offset_right = 320.0
+offset_bottom = 192.0
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=804412454]
+
+[node name="Label" type="Label" parent="HUD" unique_id=486790023]
+offset_right = 40.0
+offset_bottom = 23.0

@@ -1,12 +1,24 @@
 [gd_scene format=3 uid="uid://c3on47dufxq66"]
 
 [ext_resource type="Script" uid="uid://cw70kwp7md10" path="res://scenes/upgrade_node.gd" id="1_i2vvs"]
+[ext_resource type="Texture2D" uid="uid://dd0t78d02kw1h" path="res://assets/icons/Pixel Art Icon Pack - RPG/Equipment/Bag.png" id="1_o6dpi"]
 
-[node name="Upgrade" type="Control" unique_id=1765005584]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nexcq"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.42352942, 0.9490196, 0.5019608, 1)
+
+[node name="UpgradeNode" type="TextureButton" unique_id=2041095347]
+offset_right = 32.0
+offset_bottom = 32.0
+texture_normal = ExtResource("1_o6dpi")
 script = ExtResource("1_i2vvs")
+
+[node name="Panel" type="Panel" parent="." unique_id=1674076589]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nexcq")
