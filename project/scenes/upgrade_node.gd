@@ -39,7 +39,8 @@ func _on_pressed() -> void:
 		upgrades_purchased += 1
 		purchased.emit(data.cost)
 		
-		for child in get_children():
-			child.show()
-		
-		upgrade_unlocked.emit(data.unlocks)
+		if upgrades_purchased == 1:
+			for child in get_children():
+				if child is Line2D:
+					child.show()
+			upgrade_unlocked.emit(data.unlocks)

@@ -2,7 +2,6 @@ class_name UpgradeTree
 extends Node
 
 
-const UPGRADE_NODE_NAME := &"Upgrade%s"
 const LINE_WIDTH := 2
 const UPGRADE_NODE_SIZE := Vector2(32, 32)
 
@@ -17,28 +16,31 @@ var _money := 0:
 		_money = value
 		_money_label.text = "$%s" % _money
 		
-		for child in _upgrades_nodes.get_children():
-			if child is UpgradeNode:
-				child.notify_money_change(_money)
+		for child in _upgrade_nodes_map.values():
+			child.notify_money_change(_money)
+var _upgrade_nodes_map: Dictionary[int, UpgradeNode]
 
 @onready var _camera: Camera2D = %Camera
 @onready var _money_label: Label = %MoneyLabel
 @onready var _upgrades_nodes: Control = %UpgradesNodes
-@onready var _first_upgrade: UpgradeNode = %Upgrade0
 
 
 func _ready() -> void:
 	set_process(false)
-	
-	_draw_node_connections()
 	
 	for child in _upgrades_nodes.get_children():
 		if child is UpgradeNode:
 			child.purchased.connect(_on_upgrade_purchased)
 			child.upgrade_unlocked.connect(_on_upgrades_unlocked)
 			child.hide()
+			
+			var id: int = child.data.id
+			assert(not _upgrade_nodes_map.has(id), "Duplicate Upgrade IDs: %s" % id)
+			_upgrade_nodes_map[id] = child
 	
-	_first_upgrade.show()
+	_draw_node_connections()
+	
+	_upgrade_nodes_map.get(0).show()
 	
 	_money = _money
 
@@ -63,16 +65,15 @@ func _on_remove_money_button_pressed() -> void:
 
 
 func _draw_node_connections() -> void:
-	for node in _upgrades_nodes.get_children():
-		if node is UpgradeNode:
-			for upgrade_id in node.data.unlocks:
-				var target_node: UpgradeNode = _upgrades_nodes.get_node(UPGRADE_NODE_NAME % upgrade_id)
-				var line := Line2D.new()
-				line.z_as_relative = false
-				line.width = LINE_WIDTH
-				line.points = [UPGRADE_NODE_SIZE / 2, target_node.position - node.position + UPGRADE_NODE_SIZE / 2]
-				line.hide()
-				node.add_child(line)
+	for node in _upgrade_nodes_map.values():
+		for upgrade_id in node.data.unlocks:
+			var target_node := _upgrade_nodes_map[upgrade_id]
+			var line := Line2D.new()
+			line.z_as_relative = false
+			line.width = LINE_WIDTH
+			line.points = [UPGRADE_NODE_SIZE / 2, target_node.position - node.position + UPGRADE_NODE_SIZE / 2]
+			line.hide()
+			node.add_child(line)
 
 
 func _on_upgrade_purchased(cost: int) -> void:
@@ -81,5 +82,5 @@ func _on_upgrade_purchased(cost: int) -> void:
 
 func _on_upgrades_unlocked(upgrade_ids: Array[int]) -> void:
 	for upgrade_id in upgrade_ids:
-		var upgrade_node := _upgrades_nodes.get_node(UPGRADE_NODE_NAME % upgrade_id)
+		var upgrade_node := _upgrade_nodes_map[upgrade_id]
 		upgrade_node.show()
