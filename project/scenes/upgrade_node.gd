@@ -17,8 +17,7 @@ var upgrades_purchased: int
 
 
 func _ready() -> void:
-	if not data:
-		return
+	assert(data, "%s is missing UpgradeData Resource" % name)
 	
 	texture_normal = data.icon
 	

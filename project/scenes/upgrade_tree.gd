@@ -2,7 +2,7 @@ class_name UpgradeTree
 extends Node
 
 
-const UPGRADE_NODE_NAME := "Upgrade%s"
+const UPGRADE_NODE_NAME := &"Upgrade%s"
 const LINE_WIDTH := 2
 const UPGRADE_NODE_SIZE := Vector2(32, 32)
 
@@ -36,7 +36,7 @@ func _ready() -> void:
 		if child is UpgradeNode:
 			child.purchased.connect(_on_upgrade_purchased)
 			child.upgrade_unlocked.connect(_on_upgrades_unlocked)
-		child.hide()
+			child.hide()
 	
 	_first_upgrade.show()
 	
@@ -76,7 +76,6 @@ func _draw_node_connections() -> void:
 
 
 func _on_upgrade_purchased(cost: int) -> void:
-	print("purchased")
 	_money -= cost
 
 
