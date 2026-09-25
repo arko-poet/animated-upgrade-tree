@@ -29,34 +29,40 @@ metadata/_custom_type_script = "uid://veq3cyvgk42e"
 [sub_resource type="Resource" id="Resource_mcknv"]
 script = ExtResource("4_3hyf5")
 icon = ExtResource("3_e22m3")
+cost = 2
 unlocks = Array[int]([3, 4])
 metadata/_custom_type_script = "uid://veq3cyvgk42e"
 
 [sub_resource type="Resource" id="Resource_uk1cd"]
 script = ExtResource("4_3hyf5")
 icon = ExtResource("6_5k0ed")
+cost = 3
 unlocks = Array[int]([4, 5])
 metadata/_custom_type_script = "uid://veq3cyvgk42e"
 
 [sub_resource type="Resource" id="Resource_4754d"]
 script = ExtResource("4_3hyf5")
 icon = ExtResource("7_y8dw8")
+cost = 4
 metadata/_custom_type_script = "uid://veq3cyvgk42e"
 
 [sub_resource type="Resource" id="Resource_hg65t"]
 script = ExtResource("4_3hyf5")
 icon = ExtResource("8_fle3x")
+cost = 5
 unlocks = Array[int]([6])
 metadata/_custom_type_script = "uid://veq3cyvgk42e"
 
 [sub_resource type="Resource" id="Resource_v4tkg"]
 script = ExtResource("4_3hyf5")
 icon = ExtResource("9_yvkfq")
+cost = 6
 metadata/_custom_type_script = "uid://veq3cyvgk42e"
 
 [sub_resource type="Resource" id="Resource_uvbal"]
 script = ExtResource("4_3hyf5")
 icon = ExtResource("10_ubekw")
+cost = 7
 metadata/_custom_type_script = "uid://veq3cyvgk42e"
 
 [node name="UpgradeTree" type="Node" unique_id=894353964]

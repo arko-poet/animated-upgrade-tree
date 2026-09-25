@@ -16,6 +16,10 @@ var _money := 0:
 	set(value):
 		_money = value
 		_money_label.text = "$%s" % _money
+		
+		for child in _upgrades_nodes.get_children():
+			if child is UpgradeNode:
+				child.notify_money_change(_money)
 
 @onready var _camera: Camera2D = %Camera
 @onready var _money_label: Label = %MoneyLabel
@@ -26,6 +30,8 @@ func _ready() -> void:
 	set_process(false)
 	
 	_draw_node_connections()
+	
+	_money = _money
 
 
 func _process(_delta: float) -> void:
