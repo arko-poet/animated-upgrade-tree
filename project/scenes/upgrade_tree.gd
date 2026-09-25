@@ -8,8 +8,13 @@ var _is_dragging := false:
 		set_process(_is_dragging)
 		_last_mouse_position = get_viewport().get_mouse_position()
 var _last_mouse_position: Vector2
+var _money := 0:
+	set(value):
+		_money = value
+		_money_label.text = "$%s" % _money
 
 @onready var _camera: Camera2D = %Camera
+@onready var _money_label: Label = %MoneyLabel
 
 
 func _ready() -> void:
@@ -25,3 +30,11 @@ func _process(_delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action("drag"):
 		_is_dragging = event.is_pressed()
+
+
+func _on_add_money_button_pressed() -> void:
+	_money += 1
+
+
+func _on_remove_money_button_pressed() -> void:
+	_money -= 1

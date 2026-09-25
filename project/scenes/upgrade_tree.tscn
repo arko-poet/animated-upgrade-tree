@@ -34,6 +34,24 @@ offset_bottom = 192.0
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=804412454]
 
-[node name="Label" type="Label" parent="HUD" unique_id=486790023]
+[node name="DebugContainer" type="VBoxContainer" parent="HUD" unique_id=385088090]
 offset_right = 40.0
-offset_bottom = 23.0
+offset_bottom = 40.0
+
+[node name="MoneyLabel" type="Label" parent="HUD/DebugContainer" unique_id=486790023]
+unique_name_in_owner = true
+layout_mode = 2
+text = "$0"
+
+[node name="AddMoneyButton" type="Button" parent="HUD/DebugContainer" unique_id=1708385327]
+unique_name_in_owner = true
+layout_mode = 2
+text = "+1$"
+
+[node name="RemoveMoneyButton" type="Button" parent="HUD/DebugContainer" unique_id=1427172341]
+unique_name_in_owner = true
+layout_mode = 2
+text = "-1$"
+
+[connection signal="pressed" from="HUD/DebugContainer/AddMoneyButton" to="." method="_on_add_money_button_pressed"]
+[connection signal="pressed" from="HUD/DebugContainer/RemoveMoneyButton" to="." method="_on_remove_money_button_pressed"]
