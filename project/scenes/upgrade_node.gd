@@ -24,9 +24,7 @@ func _ready() -> void:
 	
 func notify_money_change(money: int) -> void:
 	var style_box: StyleBoxFlat = border.get_theme_stylebox(&"panel").duplicate()
-	print('-')
-	print(upgrades_purchased)
-	print(data.max_upgrades)
+	disabled = upgrades_purchased == data.max_upgrades or data.cost > money
 	if upgrades_purchased == data.max_upgrades:
 		style_box.border_color = _MAX_COLOR
 	elif data.cost <= money:
