@@ -2,6 +2,7 @@ class_name UpgradeNode
 extends TextureButton
 
 signal purchased(cost: int)
+signal upgrade_unlocked(upgrade_ids: Array[int])
 
 
 const _MAX_COLOR := Color(0.957, 0.89, 0.467, 1.0)
@@ -38,3 +39,8 @@ func _on_pressed() -> void:
 	if upgrades_purchased < data.max_upgrades:
 		upgrades_purchased += 1
 		purchased.emit(data.cost)
+		
+		for child in get_children():
+			child.show()
+		
+		upgrade_unlocked.emit(data.unlocks)

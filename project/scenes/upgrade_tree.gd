@@ -24,6 +24,7 @@ var _money := 0:
 @onready var _camera: Camera2D = %Camera
 @onready var _money_label: Label = %MoneyLabel
 @onready var _upgrades_nodes: Control = %UpgradesNodes
+@onready var _first_upgrade: UpgradeNode = %Upgrade0
 
 
 func _ready() -> void:
@@ -34,6 +35,10 @@ func _ready() -> void:
 	for child in _upgrades_nodes.get_children():
 		if child is UpgradeNode:
 			child.purchased.connect(_on_upgrade_purchased)
+			child.upgrade_unlocked.connect(_on_upgrades_unlocked)
+		child.hide()
+	
+	_first_upgrade.show()
 	
 	_money = _money
 
@@ -66,9 +71,16 @@ func _draw_node_connections() -> void:
 				line.z_as_relative = false
 				line.width = LINE_WIDTH
 				line.points = [UPGRADE_NODE_SIZE / 2, target_node.position - node.position + UPGRADE_NODE_SIZE / 2]
+				line.hide()
 				node.add_child(line)
 
 
 func _on_upgrade_purchased(cost: int) -> void:
 	print("purchased")
 	_money -= cost
+
+
+func _on_upgrades_unlocked(upgrade_ids: Array[int]) -> void:
+	for upgrade_id in upgrade_ids:
+		var upgrade_node := _upgrades_nodes.get_node(UPGRADE_NODE_NAME % upgrade_id)
+		upgrade_node.show()

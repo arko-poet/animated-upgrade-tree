@@ -87,6 +87,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Upgrade0" parent="UpgradesNodes" unique_id=1765005584 instance=ExtResource("2_x6bdh")]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 288.0
 offset_top = 288.0
