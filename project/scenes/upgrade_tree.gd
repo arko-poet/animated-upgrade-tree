@@ -31,6 +31,10 @@ func _ready() -> void:
 	
 	_draw_node_connections()
 	
+	for child in _upgrades_nodes.get_children():
+		if child is UpgradeNode:
+			child.purchased.connect(_on_upgrade_purchased)
+	
 	_money = _money
 
 
@@ -63,4 +67,8 @@ func _draw_node_connections() -> void:
 				line.width = LINE_WIDTH
 				line.points = [UPGRADE_NODE_SIZE / 2, target_node.position - node.position + UPGRADE_NODE_SIZE / 2]
 				node.add_child(line)
-	
+
+
+func _on_upgrade_purchased(cost: int) -> void:
+	print("purchased")
+	_money -= cost

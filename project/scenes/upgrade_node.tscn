@@ -3,6 +3,13 @@
 [ext_resource type="Script" uid="uid://cw70kwp7md10" path="res://scenes/upgrade_node.gd" id="1_i2vvs"]
 [ext_resource type="Texture2D" uid="uid://dd0t78d02kw1h" path="res://assets/icons/Pixel Art Icon Pack - RPG/Equipment/Bag.png" id="1_o6dpi"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6dpi"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.42352942, 0.9490196, 0.5019608, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nexcq"]
 draw_center = false
 border_width_left = 2
@@ -12,17 +19,29 @@ border_width_bottom = 2
 border_color = Color(0.42352942, 0.9490196, 0.5019608, 1)
 
 [node name="UpgradeNode" type="TextureButton" unique_id=2041095347]
-z_index = 1
+z_index = 10
 offset_right = 32.0
 offset_bottom = 32.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("1_o6dpi")
 script = ExtResource("1_i2vvs")
 
+[node name="Background" type="Panel" parent="." unique_id=76970513]
+unique_name_in_owner = true
+z_index = -1
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o6dpi")
+
 [node name="Border" type="Panel" parent="." unique_id=1674076589]
 unique_name_in_owner = true
+z_index = 1
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_nexcq")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
