@@ -4,7 +4,6 @@ extends TextureButton
 signal purchased(cost: int)
 signal upgrade_unlocked(upgrade_ids: Array[int])
 
-
 const _MAX_COLOR := Color(0.957, 0.89, 0.467, 1.0)
 const _AFFORDABLE_COLOR := Color(0.424, 0.949, 0.502, 1.0)
 const _UNAFFORDABLE_COLOR := Color(0.835, 0.278, 0.322, 1.0)
@@ -18,10 +17,10 @@ var upgrades_purchased: int
 
 func _ready() -> void:
 	assert(data, "%s is missing UpgradeData Resource" % name)
-	
+
 	texture_normal = data.icon
-	
-	
+
+
 func notify_money_change(money: int) -> void:
 	var style_box: StyleBoxFlat = border.get_theme_stylebox(&"panel").duplicate()
 	disabled = upgrades_purchased == data.max_upgrades or data.cost > money
@@ -38,7 +37,7 @@ func _on_pressed() -> void:
 	if upgrades_purchased < data.max_upgrades:
 		upgrades_purchased += 1
 		purchased.emit(data.cost)
-		
+
 		if upgrades_purchased == 1:
 			for child in get_children():
 				if child is Line2D:

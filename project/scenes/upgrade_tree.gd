@@ -1,9 +1,8 @@
 class_name UpgradeTree
 extends Node
 
-
-const LINE_WIDTH := 2
-const UPGRADE_NODE_SIZE := Vector2(32, 32)
+const _LINE_WIDTH := 2
+const _UPGRADE_NODE_SIZE := Vector2(32, 32)
 
 var _is_dragging := false:
 	set(value):
@@ -15,7 +14,7 @@ var _money := 0:
 	set(value):
 		_money = value
 		_money_label.text = "$%s" % _money
-		
+
 		for child in _upgrade_nodes_map.values():
 			child.notify_money_change(_money)
 var _upgrade_nodes_map: Dictionary[int, UpgradeNode]
@@ -27,21 +26,21 @@ var _upgrade_nodes_map: Dictionary[int, UpgradeNode]
 
 func _ready() -> void:
 	set_process(false)
-	
+
 	for child in _upgrades_nodes.get_children():
 		if child is UpgradeNode:
 			child.purchased.connect(_on_upgrade_purchased)
 			child.upgrade_unlocked.connect(_on_upgrades_unlocked)
 			child.hide()
-			
+
 			var id: int = child.data.id
 			assert(not _upgrade_nodes_map.has(id), "Duplicate Upgrade IDs: %s" % id)
 			_upgrade_nodes_map[id] = child
-	
+
 	_draw_node_connections()
-	
+
 	_upgrade_nodes_map.get(0).show()
-	
+
 	_money = _money
 
 
@@ -70,8 +69,11 @@ func _draw_node_connections() -> void:
 			var target_node := _upgrade_nodes_map[upgrade_id]
 			var line := Line2D.new()
 			line.z_as_relative = false
-			line.width = LINE_WIDTH
-			line.points = [UPGRADE_NODE_SIZE / 2, target_node.position - node.position + UPGRADE_NODE_SIZE / 2]
+			line.width = _LINE_WIDTH
+			line.points = [
+				_UPGRADE_NODE_SIZE / 2,
+				target_node.position - node.position + _UPGRADE_NODE_SIZE / 2,
+			]
 			line.hide()
 			node.add_child(line)
 
