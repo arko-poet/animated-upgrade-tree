@@ -2,6 +2,10 @@ class_name UpgradeTree
 extends Node
 
 
+const UPGRADE_NODE_NAME := "Upgrade%s"
+const LINE_WIDTH := 2
+const UPGRADE_NODE_SIZE := Vector2(32, 32)
+
 var _is_dragging := false:
 	set(value):
 		_is_dragging = value
@@ -15,10 +19,13 @@ var _money := 0:
 
 @onready var _camera: Camera2D = %Camera
 @onready var _money_label: Label = %MoneyLabel
+@onready var _upgrades_nodes: Control = %UpgradesNodes
 
 
 func _ready() -> void:
 	set_process(false)
+	
+	_draw_node_connections()
 
 
 func _process(_delta: float) -> void:
@@ -38,3 +45,16 @@ func _on_add_money_button_pressed() -> void:
 
 func _on_remove_money_button_pressed() -> void:
 	_money -= 1
+
+
+func _draw_node_connections() -> void:
+	for node in _upgrades_nodes.get_children():
+		if node is UpgradeNode:
+			for upgrade_id in node.data.unlocks:
+				var target_node: UpgradeNode = _upgrades_nodes.get_node(UPGRADE_NODE_NAME % upgrade_id)
+				var line := Line2D.new()
+				line.z_as_relative = false
+				line.width = LINE_WIDTH
+				line.points = [UPGRADE_NODE_SIZE / 2, target_node.position - node.position + UPGRADE_NODE_SIZE / 2]
+				node.add_child(line)
+	
