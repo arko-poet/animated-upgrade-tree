@@ -2,6 +2,14 @@
 
 [ext_resource type="Script" uid="uid://bfjj4on1gptcm" path="res://scenes/upgrade_tree.gd" id="1_rgrb3"]
 [ext_resource type="PackedScene" uid="uid://c3on47dufxq66" path="res://scenes/upgrade_node.tscn" id="2_x6bdh"]
+[ext_resource type="Texture2D" uid="uid://dsffh6whnufne" path="res://assets/icons/Pixel Art Icon Pack - RPG/Ore & Gem/Coal.png" id="3_e22m3"]
+[ext_resource type="Script" uid="uid://veq3cyvgk42e" path="res://scripts/upgrade_data.gd" id="4_3hyf5"]
+[ext_resource type="Texture2D" uid="uid://ndu2u8uer76n" path="res://assets/icons/Pixel Art Icon Pack - RPG/Ore & Gem/Copper Ingot.png" id="5_5k0ed"]
+[ext_resource type="Texture2D" uid="uid://b6msjjb03lls5" path="res://assets/icons/Pixel Art Icon Pack - RPG/Ore & Gem/Copper Nugget.png" id="6_y8dw8"]
+[ext_resource type="Texture2D" uid="uid://dfti5vo4cm2sk" path="res://assets/icons/Pixel Art Icon Pack - RPG/Ore & Gem/Crystal.png" id="7_fle3x"]
+[ext_resource type="Texture2D" uid="uid://c6x8fe35w6nrc" path="res://assets/icons/Pixel Art Icon Pack - RPG/Ore & Gem/Cut Emerald.png" id="8_yvkfq"]
+[ext_resource type="Texture2D" uid="uid://cfoa4uaqlg5wy" path="res://assets/icons/Pixel Art Icon Pack - RPG/Ore & Gem/Cut Ruby.png" id="9_ubekw"]
+[ext_resource type="Texture2D" uid="uid://d4butmvmaj8m0" path="res://assets/icons/Pixel Art Icon Pack - RPG/Ore & Gem/Cut Sapphire.png" id="10_2c7qo"]
 
 [sub_resource type="Gradient" id="Gradient_rgrb3"]
 offsets = PackedFloat32Array(1)
@@ -11,6 +19,51 @@ colors = PackedColorArray(0.12156863, 0.12156863, 0.12156863, 1)
 gradient = SubResource("Gradient_rgrb3")
 width = 640
 height = 360
+
+[sub_resource type="Resource" id="Resource_fthb7"]
+script = ExtResource("4_3hyf5")
+icon = ExtResource("3_e22m3")
+unlocks = Array[int]([1, 2])
+metadata/_custom_type_script = "uid://veq3cyvgk42e"
+
+[sub_resource type="Resource" id="Resource_5d8m8"]
+script = ExtResource("4_3hyf5")
+id = 1
+icon = ExtResource("5_5k0ed")
+unlocks = Array[int]([3, 4])
+metadata/_custom_type_script = "uid://veq3cyvgk42e"
+
+[sub_resource type="Resource" id="Resource_t7abb"]
+script = ExtResource("4_3hyf5")
+id = 2
+icon = ExtResource("6_y8dw8")
+unlocks = Array[int]([4, 5])
+metadata/_custom_type_script = "uid://veq3cyvgk42e"
+
+[sub_resource type="Resource" id="Resource_mtsel"]
+script = ExtResource("4_3hyf5")
+id = 3
+icon = ExtResource("7_fle3x")
+metadata/_custom_type_script = "uid://veq3cyvgk42e"
+
+[sub_resource type="Resource" id="Resource_iobwp"]
+script = ExtResource("4_3hyf5")
+id = 4
+icon = ExtResource("8_yvkfq")
+unlocks = Array[int]([6])
+metadata/_custom_type_script = "uid://veq3cyvgk42e"
+
+[sub_resource type="Resource" id="Resource_rqfrj"]
+script = ExtResource("4_3hyf5")
+id = 5
+icon = ExtResource("9_ubekw")
+metadata/_custom_type_script = "uid://veq3cyvgk42e"
+
+[sub_resource type="Resource" id="Resource_biuce"]
+script = ExtResource("4_3hyf5")
+id = 6
+icon = ExtResource("10_2c7qo")
+metadata/_custom_type_script = "uid://veq3cyvgk42e"
 
 [node name="UpgradeTree" type="Node" unique_id=894353964]
 script = ExtResource("1_rgrb3")
@@ -26,11 +79,67 @@ centered = false
 unique_name_in_owner = true
 anchor_mode = 0
 
-[node name="Upgrade" parent="." unique_id=1765005584 instance=ExtResource("2_x6bdh")]
+[node name="Upgrades" type="Control" parent="." unique_id=1645001558]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Upgrade0" parent="Upgrades" unique_id=1765005584 instance=ExtResource("2_x6bdh")]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 288.0
+offset_right = 320.0
+offset_bottom = 320.0
+_data = SubResource("Resource_fthb7")
+
+[node name="Upgrade1" parent="Upgrades" unique_id=2041095347 instance=ExtResource("2_x6bdh")]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 224.0
+offset_right = 256.0
+offset_bottom = 256.0
+_data = SubResource("Resource_5d8m8")
+
+[node name="Upgrade2" parent="Upgrades" unique_id=1841813105 instance=ExtResource("2_x6bdh")]
+layout_mode = 0
+offset_left = 352.0
+offset_top = 224.0
+offset_right = 384.0
+offset_bottom = 256.0
+_data = SubResource("Resource_t7abb")
+
+[node name="Upgrade3" parent="Upgrades" unique_id=1488326556 instance=ExtResource("2_x6bdh")]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 160.0
+offset_right = 192.0
+offset_bottom = 192.0
+_data = SubResource("Resource_mtsel")
+
+[node name="Upgrade4" parent="Upgrades" unique_id=1514259354 instance=ExtResource("2_x6bdh")]
+layout_mode = 0
 offset_left = 288.0
 offset_top = 160.0
 offset_right = 320.0
 offset_bottom = 192.0
+_data = SubResource("Resource_iobwp")
+
+[node name="Upgrade5" parent="Upgrades" unique_id=1991548303 instance=ExtResource("2_x6bdh")]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 160.0
+offset_right = 448.0
+offset_bottom = 192.0
+_data = SubResource("Resource_rqfrj")
+
+[node name="Upgrade6" parent="Upgrades" unique_id=1188864922 instance=ExtResource("2_x6bdh")]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 96.0
+offset_right = 320.0
+offset_bottom = 128.0
+_data = SubResource("Resource_biuce")
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=804412454]
 
