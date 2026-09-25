@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://c3on47dufxq66"]
+
+[ext_resource type="Script" uid="uid://cw70kwp7md10" path="res://scenes/upgrade_node.gd" id="1_i2vvs"]
+
+[node name="Upgrade" type="Control" unique_id=1765005584]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i2vvs")
