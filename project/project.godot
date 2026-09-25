@@ -13,7 +13,7 @@ config_version=5
 config/name="Animated Upgrade Tree"
 run/main_scene="uid://s1i32u2gpmpl"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="res://assets/icons/icon.svg"
+config/icon="uid://dlt4cyk8lew2"
 
 [display]
 
@@ -32,6 +32,10 @@ folder_colors={
 "res://scenes/": "yellow",
 "res://scripts/": "green"
 }
+
+[gui]
+
+theme/custom_font="uid://cnmojww3y3gl6"
 
 [input]
 
