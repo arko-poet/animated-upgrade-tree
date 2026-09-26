@@ -7,7 +7,9 @@ signal upgrade_unlocked(upgrade_ids: Array[int])
 const _MAX_COLOR := Color(0.957, 0.89, 0.467, 1.0)
 const _AFFORDABLE_COLOR := Color(0.424, 0.949, 0.502, 1.0)
 const _UNAFFORDABLE_COLOR := Color(0.835, 0.278, 0.322, 1.0)
-const _HOVER_TWEEN_DURATION := 0.05
+const _HOVER_TWEEN_DURATION := 0.1
+const _PRESS_TWEEN_DURATION := 0.1
+const _PRESS_ROTATION_DEGREES := 10
 const _HOVER_SCALE := Vector2(1.2, 1.2)
 
 @export var data: UpgradeData
@@ -48,6 +50,25 @@ func _on_pressed() -> void:
 					child.show()
 			upgrade_unlocked.emit(data.unlocks)
 
+		var current_scale := background.scale
+		var tween = create_tween()
+		tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CIRC)
+		tween.tween_property(
+			background,
+			^"rotation_degrees",
+			_PRESS_ROTATION_DEGREES,
+			_PRESS_TWEEN_DURATION,
+		)
+		tween.parallel().tween_property(background, ^"scale", Vector2.ONE, _PRESS_TWEEN_DURATION)
+		tween \
+				.parallel() \
+				.tween_property(background, ^"rotation_degrees", 0.0, _PRESS_TWEEN_DURATION) \
+				.set_delay(_PRESS_TWEEN_DURATION)
+		tween \
+				.parallel() \
+				.tween_property(background, ^"scale", current_scale, _PRESS_TWEEN_DURATION) \
+				.set_delay(_PRESS_TWEEN_DURATION)
+
 
 func _on_mouse_entered() -> void:
 	if upgrades_purchased == data.max_upgrades:
@@ -59,8 +80,7 @@ func _on_mouse_exited() -> void:
 	_animate_hover_scale(Vector2.ONE)
 
 
-func _animate_hover_scale(scale: Vector2) -> void:
+func _animate_hover_scale(target_scale: Vector2) -> void:
 	var tween := create_tween()
-	tween.tween_property(border, ^"scale", scale, _HOVER_TWEEN_DURATION)
-	tween.parallel()
-	tween.tween_property(background, ^"scale", scale, _HOVER_TWEEN_DURATION)
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.parallel().tween_property(background, ^"scale", target_scale, _HOVER_TWEEN_DURATION)

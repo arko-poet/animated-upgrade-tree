@@ -32,7 +32,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_o6dpi")
 
-[node name="Border" type="Panel" parent="." unique_id=1674076589]
+[node name="Border" type="Panel" parent="Background" unique_id=1674076589]
 unique_name_in_owner = true
 z_index = 1
 layout_mode = 0
