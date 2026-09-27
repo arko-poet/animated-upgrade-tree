@@ -1,0 +1,6 @@
+[gd_resource type="Theme" format=3 uid="uid://cvslitrdcifn7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k2ngq"]
+
+[resource]
+PopupPanel/styles/panel = SubResource("StyleBoxEmpty_k2ngq")

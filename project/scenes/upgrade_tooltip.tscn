@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://cbm025hanaqb3"]
+
+[ext_resource type="Script" uid="uid://bjmawr32djnro" path="res://scenes/upgrade_tooltip.gd" id="1_7rsfs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vgun3"]
+bg_color = Color(0.8392157, 0.49803922, 0.3764706, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[node name="UpgradeTooltip" type="PanelContainer" unique_id=1837599043]
+offset_right = 80.0
+offset_bottom = 16.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vgun3")
+script = ExtResource("1_7rsfs")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1270873261]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer" unique_id=1633350894]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Title"
+
+[node name="CostLabel" type="Label" parent="VBoxContainer" unique_id=1340917129]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Cost: $1"
+
+[node name="UpgradesLabel" type="Label" parent="VBoxContainer" unique_id=311597314]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Purchased: 0/3"

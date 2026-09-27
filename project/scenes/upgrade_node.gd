@@ -4,6 +4,8 @@ extends TextureButton
 signal purchased(cost: int)
 signal upgrade_unlocked(upgrade_ids: Array[int])
 
+const TooltipScene := preload("res://scenes/upgrade_tooltip.tscn")
+
 const _MAX_COLOR := Color(0.957, 0.89, 0.467, 1.0)
 const _AFFORDABLE_COLOR := Color(0.424, 0.949, 0.502, 1.0)
 const _UNAFFORDABLE_COLOR := Color(0.835, 0.278, 0.322, 1.0)
@@ -22,8 +24,19 @@ var upgrades_purchased: int
 
 func _ready() -> void:
 	assert(data, "%s is missing UpgradeData Resource" % name)
+	
+	# the following is an alternative to overriding TooltipPanel as in default_theme.tres
+	# it's used for removing transparent background of TooltipPanel theme which contains the custom tooltip
+	#ThemeDB.get_default_theme().set_stylebox("panel", "TooltipPanel", StyleBoxEmpty.new())
 
 	texture_normal = data.icon
+
+
+func _make_custom_tooltip(_for_text: String) -> Object:
+	var tooltip := TooltipScene.instantiate() as UpgradeTooltip
+	tooltip.set_text(data, upgrades_purchased)
+	
+	return tooltip
 
 
 func notify_money_change(money: int) -> void:
@@ -53,19 +66,12 @@ func _on_pressed() -> void:
 		var current_scale := background.scale
 		var tween = create_tween()
 		tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CIRC)
-		tween.tween_property(
-			background,
-			^"rotation_degrees",
-			_PRESS_ROTATION_DEGREES,
-			_PRESS_TWEEN_DURATION,
-		)
+		tween.tween_property(background, ^"rotation_degrees", _PRESS_ROTATION_DEGREES, _PRESS_TWEEN_DURATION)
 		tween.parallel().tween_property(background, ^"scale", Vector2.ONE, _PRESS_TWEEN_DURATION)
-		tween \
-				.parallel() \
+		tween.parallel() \
 				.tween_property(background, ^"rotation_degrees", 0.0, _PRESS_TWEEN_DURATION) \
 				.set_delay(_PRESS_TWEEN_DURATION)
-		tween \
-				.parallel() \
+		tween.parallel() \
 				.tween_property(background, ^"scale", current_scale, _PRESS_TWEEN_DURATION) \
 				.set_delay(_PRESS_TWEEN_DURATION)
 
