@@ -19,3 +19,8 @@ func _ready() -> void:
 	_title_label.text = _upgrade_data.name
 	_cost_label.text = "$%s" % _upgrade_data.cost
 	_upgrades_label.text = "%s/%s" % [_upgrades_purchased, _upgrade_data.max_upgrades]
+	
+	scale = Vector2(1, 0)
+	
+	var tween := create_tween()
+	tween.tween_property(self, ^"scale", Vector2.ONE, 0.2)
